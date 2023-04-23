@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark" class="bg-cover-5">
+<head>
+    <th:block th:replace="base :: htmlheader">
+
+    </th:block>
+</head>
+<body>
+<!-- BEGIN #app -->
+<div id="app" class="app">
+    <th:block th:replace="base :: pageheader(user=${user})">
+
+    </th:block>
+
+    <th:block th:replace="base :: sidebar(page='home', isAdmin=true)">
+
+    </th:block>
+
+    <!-- BEGIN #content -->
+    <div id="content" class="app-content">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">BREADCRUMB</a></li>
+            <li class="breadcrumb-item active">HOME PAGE</li>
+        </ul>
+        <h1 class="page-header">
+            Starter Page <small>page header description goes here...</small>
+        </h1>
+        <p>
+            Start build your page here
+        </p>
+    </div>
+    <!-- END #content -->
+
+
+    <!-- BEGIN btn-scroll-top -->
+    <a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+    <!-- END btn-scroll-top -->
+</div>
+<!-- END #app -->
+
+<th:block th:replace="base :: jslinks">
+
+</th:block>
+
+</body>
+</html>

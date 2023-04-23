@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:fragment="htmlheader">
+
+        <meta charset="utf-8">
+        <title>MNav | Home Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- ================== BEGIN core-css ================== -->
+        <link href="/css/vendor.min.css" rel="stylesheet">
+        <link href="/css/app.min.css" rel="stylesheet">
+        <!-- ================== END core-css ================== -->
+
+
+    </th:block>
+</head>
+<body>
+<th:block th:fragment="pageheader(user)">
+    <!-- BEGIN #header -->
+    <div id="header" class="app-header">
+        <!-- BEGIN desktop-toggler -->
+        <div class="desktop-toggler">
+            <button type="button" class="menu-toggler" data-toggle-class="app-sidebar-collapsed" data-dismiss-class="app-sidebar-toggled" data-toggle-target=".app">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+        <!-- BEGIN desktop-toggler -->
+
+        <!-- BEGIN mobile-toggler -->
+        <div class="mobile-toggler">
+            <button type="button" class="menu-toggler" data-toggle-class="app-sidebar-mobile-toggled" data-toggle-target=".app">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+        <!-- END mobile-toggler -->
+
+        <!-- BEGIN brand -->
+        <div class="brand">
+            <a href="#" class="brand-logo">
+                      <span class="brand-img">
+                          <span class="brand-img-text text-theme">M</span>
+                      </span>
+                <span class="brand-text">MNav</span>
+            </a>
+        </div>
+        <!-- END brand -->
+
+        <!-- BEGIN menu -->
+        <div class="menu">
+            <div class="menu-item dropdown">
+                <a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app" class="menu-link">
+                    <div class="menu-icon"><i class="bi bi-search nav-icon"></i></div>
+                </a>
+            </div>
+
+
+            <div class="menu-item dropdown dropdown-mobile-full">
+                <a href="#" data-bs-toggle="dropdown" data-bs-display="static" class="menu-link">
+                    <div class="menu-img online">
+                        <th:block th:if="${user != null && user.image != null}">
+                            <img th:src="@{${user.image}}" alt="Profile" height="60">
+                        </th:block>
+                        <th:block th:unless="${user != null && user.image != null}">
+                            <div class="d-flex align-items-center justify-content-center w-100 h-100 bg-inverse bg-opacity-25 text-inverse text-opacity-50 rounded-circle overflow-hidden">
+                                <i class="bi bi-person-fill fs-32px mb-n3"></i>
+                            </div>
+                        </th:block>
+                    </div>
+                    <div class="menu-text d-sm-block d-none w-170px" th:text="${user.email}"  th:if="${user != null && user.image != null}">username@account.com</div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end me-lg-3 fs-11px mt-1">
+                    <a class="dropdown-item d-flex align-items-center" href="#">PROFILE <i class="bi bi-person-circle ms-auto text-theme fs-16px my-n1"></i></a>
+                    <a class="dropdown-item d-flex align-items-center" href="#">SETTINGS <i class="bi bi-gear ms-auto text-theme fs-16px my-n1"></i></a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item d-flex align-items-center" href="#">LOGOUT <i class="bi bi-toggle-off ms-auto text-theme fs-16px my-n1"></i></a>
+                </div>
+            </div>
+        </div>
+        <!-- END menu -->
+
+        <!-- BEGIN menu-search -->
+        <form class="menu-search" method="POST" name="header_search_form">
+            <div class="menu-search-container">
+                <div class="menu-search-icon"><i class="bi bi-search"></i></div>
+                <div class="menu-search-input">
+                    <input type="text" class="form-control form-control-lg" placeholder="Search menu...">
+                </div>
+                <div class="menu-search-icon">
+                    <a href="#" data-toggle-class="app-header-menu-search-toggled" data-toggle-target=".app"><i class="bi bi-x-lg"></i></a>
+                </div>
+            </div>
+        </form>
+        <!-- END menu-search -->
+    </div>
+    <!-- END #header -->
+</th:block>
+<th:block th:fragment="sidebar(page,isAdmin)">
+    <!-- BEGIN #sidebar -->
+    <div id="sidebar" class="app-sidebar">
+        <!-- BEGIN scrollbar -->
+        <div class="app-sidebar-content" data-scrollbar="true" data-height="100%">
+            <!-- BEGIN menu -->
+            <div class="menu">
+                <div class="menu-header">Navigation</div>
+                <div class="menu-item" th:classappend="${page == 'home'} ? active">
+                    <a href="/" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-house-door"></i></span>
+                        <span class="menu-text">Home</span>
+                    </a>
+                </div>
+                <div class="menu-item" th:classappend="${page == 'browse'} ? active">
+                    <a href="/browse" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-briefcase"></i></span>
+                        <span class="menu-text">Job Browser</span>
+                    </a>
+                </div>
+                <div class="menu-item " th:classappend="${page == 'search'} ? active">
+                    <a href="/search" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-search"></i></span>
+                        <span class="menu-text">Search</span>
+                    </a>
+                </div>
+                <div class="menu-item " th:classappend="${page == 'pathways'} ? active">
+                    <a href="/pathways" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-map"></i></span>
+                        <span class="menu-text">Pathways</span>
+                    </a>
+                </div>
+                <div class="menu-divider">
+                </div>
+                <div class="menu-header">Admin
+                </div>
+                <div class="menu-item " th:classappend="${page == 'adminjob'} ? active">
+                    <a href="/adminjob" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-briefcase"></i></span>
+                        <span class="menu-text">Job Admin</span>
+                    </a>
+                </div>
+                <div class="menu-item " th:classappend="${page == 'admindegree'} ? active">
+                    <a href="/admindegree" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-mortarboard"></i></span>
+                        <span class="menu-text">Degree Admin</span>
+                    </a>
+                </div>
+                <div class="menu-item " th:classappend="${page == 'admincertification'} ? active">
+                    <a href="/admincertification" class="menu-link">
+                        <span class="menu-icon"><i class="fas fa-certificate"></i></span>
+                        <span class="menu-text">Certification Admin</span>
+                    </a>
+                </div>
+                <div class="menu-item " th:classappend="${page == 'admintraining'} ? active">
+                    <a href="/admintraining" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-easel"></i></span>
+                        <span class="menu-text">Training Admin</span>
+                    </a>
+                </div>
+                <div class="menu-item " th:classappend="${page == 'admincourse'} ? active">
+                    <a href="/admincourse" class="menu-link">
+                        <span class="menu-icon"><i class="bi bi-book"></i></span>
+                        <span class="menu-text">Course Admin</span>
+                    </a>
+                </div>
+            </div>
+            <!-- END menu -->
+        </div>
+        <!-- END scrollbar -->
+    </div>
+    <!-- END #sidebar -->
+
+    <!-- BEGIN mobile-sidebar-backdrop -->
+    <button class="app-sidebar-mobile-backdrop" data-toggle-target=".app" data-toggle-class="app-sidebar-mobile-toggled"></button>
+    <!-- END mobile-sidebar-backdrop -->
+</th:block>
+<th:block th:fragment="jslinks">
+    <!-- ================== BEGIN core-js ================== -->
+    <script src="/js/vendor.min.js"></script>
+    <script src="/js/app.min.js"></script>
+    <!-- ================== END core-js ================== -->
+</th:block>
+</body>
+</html>

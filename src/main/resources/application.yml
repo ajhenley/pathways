@@ -1,0 +1,29 @@
+server:
+  port: 5004
+
+logging:
+  level:
+    root: ERROR
+    org.springframework.web: DEBUG
+    com.auth0.example: TRACE
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+  security:
+    oauth2:
+      client:
+        registration:
+          auth0:
+            client-id: TOSA9loJwjK3F83wcrxCjTAwxEd11qPH
+            client-secret: PIDSq8j2EsuUC1RbBlEkBp2JAemTH1UmTaDPLxmJq6pq0z50fVfGGps9t0BDonMI
+            scope:
+              - openid
+              - profile
+              - email
+        provider:
+          auth0:
+            # trailing slash is important!
+            issuer-uri: https://learningbycoding.auth0.com/
