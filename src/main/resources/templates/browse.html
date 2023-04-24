@@ -29,7 +29,7 @@
       <div class="card-body">
         <div class="row">
           <div class="col-xl-3" th:each="node : ${nodes}">
-            <a href="nodedetails.html">
+            <a th:href="@{/jobdetail/{id} (id=${node.id})}">
               <div class="card mb-3">
                 <div class="card-body pb-0">
                   <img th:if="${node.image == null}" src="https://res.cloudinary.com/learningbycoding/image/upload/v1682219731/job_gwav3o.png" alt="" class="card-img-top">

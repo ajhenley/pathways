@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark" class="bg-cover-5">
+<head>
+  <th:block th:replace="base :: htmlheader">
+
+  </th:block>
+</head>
+<body>
+<!-- BEGIN #app -->
+<div id="app" class="app">
+  <th:block th:replace="base :: pageheader(user=${user})">
+
+  </th:block>
+
+  <th:block th:replace="base :: sidebar(page='home', isAdmin=true)">
+
+  </th:block>
+
+  <!-- BEGIN #content -->
+  <div id="content" class="app-content">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">BREADCRUMB</a></li>
+      <li class="breadcrumb-item active">HOME PAGE</li>
+    </ul>
+    <h1 class="page-header" th:inline="text">
+      [[${job.title}]] Details Page <small>page header description goes here...</small>
+    </h1>
+    <div class="card">
+      <div class="card-body p-0">
+        <!-- BEGIN profile -->
+        <div class="profile">
+          <!-- BEGIN profile-container -->
+          <div class="profile-container">
+            <!-- BEGIN profile-sidebar -->
+            <div class="profile-sidebar">
+              <div class="desktop-sticky-top">
+                <div class="profile-img">
+                  <img th:if="${job.image == null}" src="https://res.cloudinary.com/learningbycoding/image/upload/v1682219731/job_gwav3o.png" alt="" >
+                  <img th:unless="${job.image == null}" th:src="@{${node.image}}" alt="" >
+
+                </div>
+                <!-- profile info -->
+                <h4 th:text="${job.title}">Dentist</h4>
+
+                <hr class="mt-4 mb-4">
+
+                <!-- people-to-follow -->
+                <div class="fw-bold mb-3 fs-16px">Quick Facts</div>
+                <div class="card-body">
+                  <!-- BEGIN title -->
+                  <div class="d-flex fw-bold small mb-3">
+                    <span class="flex-grow-1">Positions Available</span>
+                  </div>
+                  <!-- END title -->
+                  <!-- BEGIN stat-lg -->
+                  <div class="row align-items-center mb-2">
+                    <div class="">
+                      <h4 class="mb-0" th:text="${#numbers.formatDecimal(job.numpositions, 0, 'COMMA', 0, 'POINT')}">300k</h4>
+                    </div>
+                  </div>
+                  <!-- END stat-lg -->
+                  <!-- BEGIN stat-sm -->
+                  <div class="small text-inverse text-opacity-50 text-truncate" th:inline="text">
+                    <i th:if="${job.numposdelta > 0}" class="fa fa-chevron-up fa-fw me-1"></i><i th:unless="${job.numposdelta > 0}" class="fa fa-chevron-down fa-fw me-1"></i> [[${job.numposdelta}]]% by 2025
+                  </div>
+                  <!-- END stat-sm -->
+                </div>
+                <div class="card-body">
+                  <!-- BEGIN title -->
+                  <div class="d-flex fw-bold small mb-3">
+                    <span class="flex-grow-1">Pay Range</span>
+                  </div>
+                  <!-- END title -->
+                  <!-- BEGIN stat-lg -->
+                  <div class="row align-items-center mb-2">
+                    <div class="">
+                      <h5 class="mb-0" th:inline="text">[[${payrange.hourly}]] per hour<br>[[${payrange.annual}]] per year</h5>
+                    </div>
+                  </div>
+                  <!-- END stat-lg -->
+                </div>
+<!--                <div class="card-body">-->
+<!--                  &lt;!&ndash; BEGIN title &ndash;&gt;-->
+<!--                  <div class="d-flex fw-bold small mb-3">-->
+<!--                    <span class="flex-grow-1">Education Required</span>-->
+<!--                  </div>-->
+<!--                  &lt;!&ndash; END title &ndash;&gt;-->
+<!--                  &lt;!&ndash; BEGIN stat-lg &ndash;&gt;-->
+<!--                  <div class="row align-items-center mb-2">-->
+<!--                    <div class="">-->
+<!--                      <h5 class="mb-0">PhD/Doctorate</h5>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  &lt;!&ndash; END stat-lg &ndash;&gt;-->
+<!--                </div>-->
+<!--                <div class="card-body">-->
+<!--                  &lt;!&ndash; BEGIN title &ndash;&gt;-->
+<!--                  <div class="d-flex fw-bold small mb-3">-->
+<!--                    <span class="flex-grow-1">Experience Required</span>-->
+<!--                  </div>-->
+<!--                  &lt;!&ndash; END title &ndash;&gt;-->
+<!--                  &lt;!&ndash; BEGIN stat-lg &ndash;&gt;-->
+<!--                  <div class="row align-items-center mb-2">-->
+<!--                    <div class="">-->
+<!--                      <h5 class="mb-0">1 year Residency</h5>-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  &lt;!&ndash; END stat-lg &ndash;&gt;-->
+<!--                </div>-->
+
+              </div>
+            </div>
+            <!-- END profile-sidebar -->
+
+            <!-- BEGIN profile-content -->
+            <div class="profile-content">
+
+              <ul class="profile-tab nav nav-tabs nav-tabs-v2" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a href="#node-info" class="nav-link active" data-bs-toggle="tab" aria-selected="true" role="tab">
+                    <div class="nav-field"></div>
+                    <div class="nav-value">INFO</div>
+                  </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a href="#node-browse" class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
+                    <div class="nav-field"></div>
+                    <div class="nav-value">BROWSE</div>
+                  </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a href="#node-path" class="nav-link" data-bs-toggle="tab" aria-selected="false" tabindex="-1" role="tab">
+                    <div class="nav-field"></div>
+                    <div class="nav-value">PATH</div>
+                  </a>
+                </li>
+
+              </ul>
+              <div class="profile-content-container">
+                <div class="row gx-4">
+                  <div class="col-xl-12">
+                    <div class="tab-content p-0">
+                      <!-- BEGIN tab-pane -->
+                      <div class="tab-pane fade show active" id="node-info" role="tabpanel">
+                        <div class="card mb-3">
+                          <!-- Node detail pane -->
+                          <div class="card-body">
+                            <!-- post content -->
+                            <h2 th:inline="text">What do [[${job.title}]] do?</h2>
+                            <hr class="mb-1">
+                            <p class="lead" th:text="${job.tersedescription}">
+                              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vulputate, mi id aliquet maximus, lectus quam scelerisque ligula, ac semper purus ligula et nisi. Vivamus elementum libero a quam dapibus, non dignissim erat feugiat. Praesent gravida odio ut metus dictum, in hendrerit felis placerat. Morbi vel pellentesque turpis. Aliquam mattis enim dolor, et imperdiet nibh gravida eget. Curabitur metus quam, fringilla vel consectetur sed, interdum et est. Praesent congue mauris non orci consectetur aliquam. Nunc ac imperdiet lacus, id dapibus quam. Vestibulum ac faucibus odio. Vivamus scelerisque est id ultricies semper. Curabitur id sem nisl. Donec eget cursus sapien.
+                            </p><br>
+                            <h5 th:inline="text">Duties of a [[${job.title}]] include:</h5>
+                            <ul class="list-group list-group-flush">
+                              <li class="list-group-item" th:each="duty : ${duties}"><b th:text="${duty}">In condimentum odio nibh, ut tincidunt lacus maximus sed. Suspendisse eget lacus efficitur, commodo</b> </li>
+                            </ul><br>
+                            <p class="lead" th:utext="${longdescription}">
+                              In condimentum odio nibh, ut tincidunt lacus maximus sed. Suspendisse eget lacus efficitur, commodo erat tempor, imperdiet ex. Cras nunc ante, tincidunt sed ante quis, venenatis commodo risus. Cras malesuada auctor libero, quis consectetur enim pellentesque id. Phasellus et tellus orci. Nam egestas quis erat a finibus. Vivamus malesuada mi vitae enim ultricies, ut mollis sem bibendum. Mauris eu neque elementum, aliquet justo vel, ornare libero. Aliquam enim ipsum, tincidunt vitae sem sit amet, maximus tincidunt lacus.
+                              <br><br>
+                              Pellentesque efficitur leo at diam ornare efficitur. Vestibulum pulvinar odio at tortor vehicula, nec dignissim urna molestie. Ut vitae viverra ex. Aenean fringilla nisl a congue ultrices. Vivamus diam est, dapibus ac augue vitae, vestibulum fringilla est. Integer interdum velit ut vestibulum aliquam. Duis blandit facilisis elit vitae faucibus. Phasellus non tempus sapien, in laoreet tortor. Donec molestie ante risus, id auctor nulla feugiat a. Nulla facilisi.
+                              <br><br>
+                              Vivamus ac magna mi. Aenean velit lectus, commodo ac libero porttitor, pretium pellentesque magna. Donec facilisis, risus sit amet ornare tempus, metus orci pellentesque felis, et interdum erat sapien id lectus. Maecenas vestibulum, sem nec imperdiet dictum, nisl urna varius quam, vel aliquet ex ligula vitae libero. Nulla consequat pharetra elit a laoreet. Proin sit amet nulla lobortis, mattis ex et, fermentum felis. Vivamus vel bibendum nunc. Fusce vulputate, justo eu ornare facilisis, augue odio tristique est, ornare eleifend eros augue id libero. Praesent pharetra neque non risus eleifend, ac pretium sapien laoreet. Donec vehicula, turpis at facilisis vulputate, magna mi iaculis arcu, vel tempor nulla nisi vel nunc. Aenean tristique fermentum eros, eu laoreet magna viverra eu. Duis tempor, tortor sed iaculis tempor, nibh libero hendrerit est, id consectetur ex tellus eget augue. Praesent sit amet dui mattis erat rutrum tempus.
+                              <br><br>
+                              Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam nec urna lacus. Integer nec eros vel felis tempor rutrum. Donec eleifend accumsan consectetur. Fusce a condimentum massa, sit amet varius libero. Donec tempus augue consectetur ligula viverra auctor. Nam eu maximus nisl. Fusce et feugiat odio.
+
+
+                            </p>
+                          </div>
+                          <div class="card-arrow">
+                            <div class="card-arrow-top-left"></div>
+                            <div class="card-arrow-top-right"></div>
+                            <div class="card-arrow-bottom-left"></div>
+                            <div class="card-arrow-bottom-right"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END tab-pane -->
+
+                      <!-- BEGIN tab-pane -->
+                      <div class="tab-pane fade" id="node-browse" role="tabpanel">
+                        <div class="list-group">
+                          <p class="lead">These are other occupations similar to the one you are asking about. Perhaps they are of interest to you.</p>
+                          <div class="list-group-item d-flex align-items-center" th:each="shortie : ${occsShort}">
+                            <div class="flex-fill px-3">
+                              <div><a th:href="@{/jobdetail2/{code} (code=${shortie[0]})}" class="text-inverse fw-bold text-decoration-none" th:text="${shortie[1]}">Dental Surgeon</a></div>
+                            </div>
+                            <a th:href="@{/jobdetail2/{code} (code=${shortie[0]})}" class="btn btn-outline-theme">Closely Related</a>
+                          </div>
+                          <div class="list-group-item d-flex align-items-center" th:each="longie : ${occsLong}">
+                            <div class="flex-fill px-3">
+                              <div><a th:href="@{/jobdetail2/{code} (code=${longie[0]})}" class="text-inverse fw-bold text-decoration-none" th:text="${longie[1]}">ENT Specialist</a></div>
+                            </div>
+                            <a th:href="@{/jobdetail2/{code} (code=${longie[0]})}" class="btn btn-outline-warning">Loosely Related</a>
+                          </div>
+                          <div class="list-group-item d-flex align-items-center" th:each="supple : ${occsSupple}">
+                            <div class="flex-fill px-3">
+                              <div><a th:href="@{/jobdetail2/{code} (code=${supple[0]})}" class="text-inverse fw-bold text-decoration-none" th:text="${supple[1]}">Dental Hygenist</a></div>
+                            </div>
+                            <a th:href="@{/jobdetail2/{code} (code=${supple[0]})}" class="btn btn-outline-danger">Supporting</a>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END tab-pane -->
+
+                      <!-- BEGIN tab-pane -->
+                      <div class="tab-pane fade" id="node-path" role="tabpanel">
+                        <div class="row">
+                          <!-- BEGIN col-4 -->
+                          <p class="lead">Here are the steps, some required and some optional, that you will need to pursue this occupation:</p>
+                          <div class="col-xl-6 col-lg-6">
+                            <!-- BEGIN card -->
+                            <div class="card mb-3">
+                              <!-- BEGIN card-header -->
+                              <div class="card-header d-flex align-items-center bg-inverse bg-opacity-10">
+                                <span class="flex-grow-1 fw-400">What You Need</span>
+                              </div>
+                              <!-- END card-header -->
+                              <!-- BEGIN list-group -->
+                              <div class="list-group list-group-flush">
+                                <!-- BEGIN list-group-item -->
+                                <div class="list-group-item d-flex px-3">
+                                  <div class="me-3 pt-1">
+                                    <i class="far bi-mortarboard text-inverse text-opacity-50 fa-fw fa-lg"></i>
+                                  </div>
+                                  <div class="flex-fill">
+                                    <div class="fw-400">Doctorate of Dental Surgery</div>
+                                    <div>
+                                      <span class="badge border border-danger text-danger">required</span>
+                                    </div>
+
+                                  </div>
+                                </div>
+                                <!-- END list-group-item -->
+                                <!-- BEGIN list-group-item -->
+                                <a href="#" class="list-group-item list-group-item-action d-flex ps-3">
+                                  <div class="me-3 pt-1">
+                                    <i class="far bi-briefcase text-inverse text-opacity-50 fa-fw fa-lg"></i>
+                                  </div>
+                                  <div class="flex-fill">
+                                    <div class="fw-400">Intern Dentist</div>
+                                    <div class="small text-inverse text-opacity-50 mb-2">1 Year</div>
+                                    <div class="mb-1">
+                                      <span class="badge border border-danger text-danger">required</span>
+                                    </div>
+                                  </div>
+                                </a>
+                                <!-- END list-group-item -->
+                                <!-- BEGIN list-group-item -->
+                                <a href="#" class="list-group-item list-group-item-action d-flex ps-3">
+                                  <div class="me-3 pt-1">
+                                    <i class="far bi-mortarboard text-inverse text-opacity-50 fa-fw fa-lg"></i>
+                                  </div>
+                                  <div class="flex-fill">
+                                    <div class="fw-400">Bachelor's Degree</div>
+                                    <div class="small text-inverse text-opacity-50 mb-2">Preferably in STEM</div>
+                                    <div class="mb-1 d-flex align-items-center">
+                                      <div class="me-2"><span class="badge border border-danger text-danger">required</span></div>
+
+                                    </div>
+                                  </div>
+                                </a>
+                                <!-- END list-group-item -->
+                              </div>
+                              <!-- END list-group -->
+                              <!-- BEGIN card-arrow -->
+                              <div class="card-arrow">
+                                <div class="card-arrow-top-left"></div>
+                                <div class="card-arrow-top-right"></div>
+                                <div class="card-arrow-bottom-left"></div>
+                                <div class="card-arrow-bottom-right"></div>
+                              </div>
+                              <!-- END card-arrow -->
+                            </div>
+                            <!-- END card -->
+                          </div>
+                          <!-- END col-4 -->
+                          <!-- BEGIN col-4 -->
+<!--                          <div class="col-xl-6 col-lg-6">-->
+<!--                            &lt;!&ndash; BEGIN card &ndash;&gt;-->
+<!--                            <div class="card mb-3">-->
+<!--                              &lt;!&ndash; BEGIN card-header &ndash;&gt;-->
+<!--                              <div class="card-header d-flex align-items-center bg-inverse bg-opacity-10">-->
+<!--                                <span class="flex-grow-1 fw-400">What You Can Do Next</span>-->
+<!--                                <a href="#" class="text-inverse text-opacity-50 text-decoration-none me-3"><i class="fa fa-fw fa-redo"></i></a>-->
+<!--                                <a href="#" class="text-inverse text-opacity-50 text-decoration-none"><i class="fa fa-fw fa-trash"></i></a>-->
+<!--                              </div>-->
+<!--                              &lt;!&ndash; END card-header &ndash;&gt;-->
+<!--                              &lt;!&ndash; BEGIN list-group &ndash;&gt;-->
+<!--                              <div class="list-group list-group-flush">-->
+<!--                                &lt;!&ndash; BEGIN list-group-item &ndash;&gt;-->
+<!--                                <div class="list-group-item d-flex px-3">-->
+<!--                                  <div class="me-3 pt-1">-->
+<!--                                    <i class="fa fa-tools text-inverse text-opacity-50 fa-fw fa-lg"></i>-->
+<!--                                  </div>-->
+<!--                                  <div class="flex-fill">-->
+<!--                                    <div class="fw-400 lh-20">HTML5 flexbox old browser compatibility</div>-->
+<!--                                    <div class="small text-inverse text-opacity-50 mb-2">#29982 handled by Sean</div>-->
+<!--                                    <div class="mb-1">-->
+<!--                                      <span class="badge border border-indigo text-indigo">enhancement</span>-->
+<!--                                    </div>-->
+<!--                                    <hr class="mt-15px mb-15px">-->
+<!--                                    <div class="d-flex align-items-center mb-2">-->
+<!--                                      <div class="fw-400 me-2">-->
+<!--                                        Task (1/2)-->
+<!--                                      </div>-->
+<!--                                      <div>-->
+<!--                                        <a href="#" class="text-inverse text-opacity-50" data-bs-toggle="collapse" data-bs-target="#inProgressBoard">-->
+<!--                                          <i class="fa fa-plus-circle"></i>-->
+<!--                                        </a>-->
+<!--                                      </div>-->
+<!--                                      <div class="progress progress-xs w-100px me-2 ms-auto" style="height: 6px;">-->
+<!--                                        <div class="progress-bar progress-bar-striped bg-warning" style="width: 50%;"></div>-->
+<!--                                      </div>-->
+<!--                                      <div class="fs-12px">50%</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group mb-1">-->
+<!--                                      <div class="collapse show" id="inProgressBoard">-->
+<!--                                        <div class="form-check mb-2px">-->
+<!--                                          <input type="checkbox" class="form-check-input" id="customCheck4" checked="">-->
+<!--                                          <label class="form-check-label small" for="customCheck4">check all browser compatibility for HTML5 flexbox</label>-->
+<!--                                        </div>-->
+<!--                                        <div class="form-check mb-2px">-->
+<!--                                          <input type="checkbox" class="form-check-input" id="customCheck5">-->
+<!--                                          <label class="form-check-label small" for="customCheck5">fallback integration by using other display property</label>-->
+<!--                                        </div>-->
+<!--                                      </div>-->
+<!--                                    </div>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; END list-group-item &ndash;&gt;-->
+<!--                                &lt;!&ndash; BEGIN list-group-item &ndash;&gt;-->
+<!--                                <div class="list-group-item d-flex px-3">-->
+<!--                                  <div class="me-3 pt-1">-->
+<!--                                    <i class="fa fa-bug text-danger fa-fw fa-lg"></i>-->
+<!--                                  </div>-->
+<!--                                  <div class="flex-fill">-->
+<!--                                    <div class="fw-400">Mobile app autoclose on iOS</div>-->
+<!--                                    <div class="text-inverse text-opacity-50 mb-2">#29953 handled by Ken</div>-->
+<!--                                    <div class="mb-1">-->
+<!--                                      <span class="badge border border-gray-300 text-inverse text-opacity-50">issue</span>-->
+<!--                                      <span class="badge border border-danger text-danger">bug</span>-->
+<!--                                    </div>-->
+<!--                                    <hr class="mt-15px mb-15px">-->
+<!--                                    <div class="d-flex align-items-center mb-2">-->
+<!--                                      <div class="fw-400 me-2">-->
+<!--                                        Task (0/1)-->
+<!--                                      </div>-->
+<!--                                      <div>-->
+<!--                                        <a href="#" class="text-inverse text-opacity-50" data-bs-toggle="collapse" data-bs-target="#inProgress2Board">-->
+<!--                                          <i class="fa fa-plus-circle"></i>-->
+<!--                                        </a>-->
+<!--                                      </div>-->
+<!--                                      <div class="progress progress-xs w-100px me-2 ms-auto" style="height: 6px;">-->
+<!--                                        <div class="progress-bar progress-bar-striped bg-danger" style="width: 5%;"></div>-->
+<!--                                      </div>-->
+<!--                                      <div class="fs-12px">0%</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="form-group mb-1">-->
+<!--                                      <div class="collapse show" id="inProgress2Board">-->
+<!--                                        <div class="form-check mb-2px">-->
+<!--                                          <input type="checkbox" class="form-check-input" id="customCheck6">-->
+<!--                                          <label class="form-check-label small" for="customCheck6">debug and fix mobile auto close while using GPS issue</label>-->
+<!--                                        </div>-->
+<!--                                      </div>-->
+<!--                                    </div>-->
+<!--                                  </div>-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; END list-group-item &ndash;&gt;-->
+<!--                              </div>-->
+<!--                              &lt;!&ndash; END list-group &ndash;&gt;-->
+<!--                              &lt;!&ndash; BEGIN card-arrow &ndash;&gt;-->
+<!--                              <div class="card-arrow">-->
+<!--                                <div class="card-arrow-top-left"></div>-->
+<!--                                <div class="card-arrow-top-right"></div>-->
+<!--                                <div class="card-arrow-bottom-left"></div>-->
+<!--                                <div class="card-arrow-bottom-right"></div>-->
+<!--                              </div>-->
+<!--                              &lt;!&ndash; END card-arrow &ndash;&gt;-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; END card &ndash;&gt;-->
+<!--                          </div>-->
+                          <!-- END col-4 -->
+                          <!-- BEGIN col-4 -->
+                        </div>
+                      </div>
+                      <!-- END tab-pane -->
+
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- END profile-content -->
+          </div>
+          <!-- END profile-container -->
+        </div>
+        <!-- END profile -->
+      </div>
+      <div class="card-arrow">
+        <div class="card-arrow-top-left"></div>
+        <div class="card-arrow-top-right"></div>
+        <div class="card-arrow-bottom-left"></div>
+        <div class="card-arrow-bottom-right"></div>
+      </div>
+    </div>
+
+  </div>
+  <!-- END #content -->
+
+
+  <!-- BEGIN btn-scroll-top -->
+  <a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+  <!-- END btn-scroll-top -->
+</div>
+<!-- END #app -->
+
+<th:block th:replace="base :: jslinks">
+
+</th:block>
+
+</body>
+</html>
+

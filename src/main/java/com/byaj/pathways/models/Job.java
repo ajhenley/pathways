@@ -6,60 +6,78 @@ import javax.persistence.*;
 @Table(name = "job_data")
 public class Job {
     @Id
-    private String id;
-    private String onetsoc_code;
+    private int id;
+
+    @Column(name="onetsoc_code")
+    private String onetsoccode;
     private String title;
     private String description;
     private String image;
+    private int numpositions;
+    private double numposdelta;
     private String payrange;
-    private String median_pay;
-    private String entry_ed;
-    private String work_exp;
-    private String terse_description;
-    private String long_description;
-    private String alt_titles;
-    private String related_occs_short;
-    private String related_occs_long;
-    private String related_occs_supplemental;
+    @Column(name="median_pay")
+    private String medianpay;
+    @Column(name="entry_ed")
+    private String entryed;
+    @Column(name="work_exp")
+    private String workexp;
+    @Column(name="terse_description")
+    private String tersedescription;
+    @Column(name="long_description")
+    private String longdescription;
+    @Column(name="alt_titles")
+    private String alttitles;
+    @Column(name="related_occs_short")
+    private String relatedoccsshort;
+    @Column(name="related_occs_long")
+    private String relatedoccslong;
+    @Column(name="related_occs_supplemental")
+    private String relatedoccssupplemental;
     private String duties;
-    private String video_url;
+
+    @Column(name="video_url")
+    private String videourl;
 
     public Job() {
     }
 
-    public Job(String onetsoc_code, String title, String description, String image, String payrange, String median_pay, String entry_ed, String work_exp, String terse_description, String long_description, String alt_titles, String related_occs_short, String related_occs_long, String related_occs_supplemental, String duties, String video_url) {
-        this.onetsoc_code = onetsoc_code;
+    public Job(String onetsoccode, String title, String description, String image, int numpositions, double numposdelta, String payrange, String medianpay, String entryed, String workexp, String tersedescription, String longdescription, String alttitles, String relatedoccsshort, String relatedoccslong, String relatedoccssupplemental, String duties, String videourl) {
+        this.onetsoccode = onetsoccode;
         this.title = title;
         this.description = description;
         this.image = image;
+        this.numpositions = numpositions;
+        this.numposdelta = numposdelta;
         this.payrange = payrange;
-        this.median_pay = median_pay;
-        this.entry_ed = entry_ed;
-        this.work_exp = work_exp;
-        this.terse_description = terse_description;
-        this.long_description = long_description;
-        this.alt_titles = alt_titles;
-        this.related_occs_short = related_occs_short;
-        this.related_occs_long = related_occs_long;
-        this.related_occs_supplemental = related_occs_supplemental;
+        this.medianpay = medianpay;
+        this.entryed = entryed;
+        this.workexp = workexp;
+        this.tersedescription = tersedescription;
+        this.longdescription = longdescription;
+        this.alttitles = alttitles;
+        this.relatedoccsshort = relatedoccsshort;
+        this.relatedoccslong = relatedoccslong;
+        this.relatedoccssupplemental = relatedoccssupplemental;
         this.duties = duties;
-        this.video_url = video_url;
+        this.videourl = videourl;
     }
 
-    public String getId() {
+
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getOnetsoc_code() {
-        return onetsoc_code;
+    public String getOnetsoccode() {
+        return onetsoccode;
     }
 
-    public void setOnetsoc_code(String onetsoc_code) {
-        this.onetsoc_code = onetsoc_code;
+    public void setOnetsoccode(String onetsoccode) {
+        this.onetsoccode = onetsoccode;
     }
 
     public String getTitle() {
@@ -78,6 +96,30 @@ public class Job {
         this.description = description;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public int getNumpositions() {
+        return numpositions;
+    }
+
+    public void setNumpositions(int numpositions) {
+        this.numpositions = numpositions;
+    }
+
+    public double getNumposdelta() {
+        return numposdelta;
+    }
+
+    public void setNumposdelta(double numposdelta) {
+        this.numposdelta = numposdelta;
+    }
+
     public String getPayrange() {
         return payrange;
     }
@@ -86,76 +128,76 @@ public class Job {
         this.payrange = payrange;
     }
 
-    public String getMedian_pay() {
-        return median_pay;
+    public String getMedianpay() {
+        return medianpay;
     }
 
-    public void setMedian_pay(String median_pay) {
-        this.median_pay = median_pay;
+    public void setMedianpay(String medianpay) {
+        this.medianpay = medianpay;
     }
 
-    public String getEntry_ed() {
-        return entry_ed;
+    public String getEntryed() {
+        return entryed;
     }
 
-    public void setEntry_ed(String entry_ed) {
-        this.entry_ed = entry_ed;
+    public void setEntryed(String entryed) {
+        this.entryed = entryed;
     }
 
-    public String getWork_exp() {
-        return work_exp;
+    public String getWorkexp() {
+        return workexp;
     }
 
-    public void setWork_exp(String work_exp) {
-        this.work_exp = work_exp;
+    public void setWorkexp(String workexp) {
+        this.workexp = workexp;
     }
 
-    public String getTerse_description() {
-        return terse_description;
+    public String getTersedescription() {
+        return tersedescription;
     }
 
-    public void setTerse_description(String terse_description) {
-        this.terse_description = terse_description;
+    public void setTersedescription(String tersedescription) {
+        this.tersedescription = tersedescription;
     }
 
-    public String getLong_description() {
-        return long_description;
+    public String getLongdescription() {
+        return longdescription;
     }
 
-    public void setLong_description(String long_description) {
-        this.long_description = long_description;
+    public void setLongdescription(String longdescription) {
+        this.longdescription = longdescription;
     }
 
-    public String getAlt_titles() {
-        return alt_titles;
+    public String getAlttitles() {
+        return alttitles;
     }
 
-    public void setAlt_titles(String alt_titles) {
-        this.alt_titles = alt_titles;
+    public void setAlttitles(String alttitles) {
+        this.alttitles = alttitles;
     }
 
-    public String getRelated_occs_short() {
-        return related_occs_short;
+    public String getRelatedoccsshort() {
+        return relatedoccsshort;
     }
 
-    public void setRelated_occs_short(String related_occs_short) {
-        this.related_occs_short = related_occs_short;
+    public void setRelatedoccsshort(String relatedoccsshort) {
+        this.relatedoccsshort = relatedoccsshort;
     }
 
-    public String getRelated_occs_long() {
-        return related_occs_long;
+    public String getRelatedoccslong() {
+        return relatedoccslong;
     }
 
-    public void setRelated_occs_long(String related_occs_long) {
-        this.related_occs_long = related_occs_long;
+    public void setRelatedoccslong(String relatedoccslong) {
+        this.relatedoccslong = relatedoccslong;
     }
 
-    public String getRelated_occs_supplemental() {
-        return related_occs_supplemental;
+    public String getRelatedoccssupplemental() {
+        return relatedoccssupplemental;
     }
 
-    public void setRelated_occs_supplemental(String related_occs_supplemental) {
-        this.related_occs_supplemental = related_occs_supplemental;
+    public void setRelatedoccssupplemental(String relatedoccssupplemental) {
+        this.relatedoccssupplemental = relatedoccssupplemental;
     }
 
     public String getDuties() {
@@ -166,19 +208,11 @@ public class Job {
         this.duties = duties;
     }
 
-    public String getVideo_url() {
-        return video_url;
+    public String getVideourl() {
+        return videourl;
     }
 
-    public void setVideo_url(String video_url) {
-        this.video_url = video_url;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
+    public void setVideourl(String videourl) {
+        this.videourl = videourl;
     }
 }

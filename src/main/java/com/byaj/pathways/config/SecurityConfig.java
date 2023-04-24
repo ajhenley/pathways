@@ -19,8 +19,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 // allow all users to access the home pages and the static images directory
-                .mvcMatchers("/", "/add", "/api/csv/upload", "/api/csv/upload/**","/browse", "/search", "/browse/**", "/nodedetail", "/nodedetail/**",
-                        "/nodedetail2", "/nodedetail2/**","/css/**", "/media/**", "/js/**", "/plugins/**", "/fonts/**", "/webfonts/**").permitAll()
+                .mvcMatchers("/", "/add", "/api/csv/upload", "/api/csv/upload/**","/browse", "/search", "/browse/**", "/jobdetail2", "/jobdetail/**",
+                        "/jobdetail", "/jobdetail2/**","/css/**", "/media/**", "/js/**", "/plugins/**", "/fonts/**", "/webfonts/**").permitAll()
                 // all other requests must be authenticated
                 .anyRequest().authenticated()
                 .and().oauth2Login()
